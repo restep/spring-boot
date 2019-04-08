@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.restep.mapper.ReadListMapper">
+    <resultMap id="BaseResultMap" type="com.restep.entity.Book">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="reader" property="reader" jdbcType="VARCHAR"/>
+        <result column="isbn" property="isbn" jdbcType="VARCHAR"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="author" property="author" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, reader, isbn, title, author, description
+    </sql>
+
+    <select id="queryByReader" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from readlist
+        where reader like CONCAT('%',#{name, jdbcType=VARCHAR},'%')
+    </select>
+
+    <insert id="save" parameterType="com.lgp.SpringBoot.bean.com.restep.entity.Book">
+        insert into readlist (reader, isbn, title, author, description
+        )
+        values (#{reader,jdbcType=VARCHAR}, #{isbn,jdbcType=VARCHAR}, #{title,jdbcType=TIMESTAMP}, #{author,jdbcType=TIMESTAMP}, #{description,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from readlist
+    </select>
+
+    <select id="get" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from readlist
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+</mapper>
