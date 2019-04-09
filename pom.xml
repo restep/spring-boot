@@ -8,7 +8,7 @@
     <artifactId>spring-boot</artifactId>
     <version>2019.04.09</version>
 
-    <packaging>war</packaging>
+    <packaging>pom</packaging>
     <name>spring-boot</name>
 
     <build>

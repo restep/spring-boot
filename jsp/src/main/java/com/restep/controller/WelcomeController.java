@@ -14,11 +14,6 @@ import java.util.Map;
 @Controller
 public class WelcomeController {
     @GetMapping("/")
-    public String index() {
-        return "index";
-    }
-
-    @GetMapping("/welcome")
     public String welcome(Map<String, Object> model) {
         model.put("time", new Date());
         model.put("message", "hello world");
