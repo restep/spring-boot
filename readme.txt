@@ -3,4 +3,4 @@
 
 源码地址
     https://github.com/ityouknow/spring-boot-leaning.git
-    分支gitbook_column2.0
+    branch gitbook_column2.0
