@@ -1,4 +1,4 @@
-package com.restep.controller;
+package com.restep.web;
 
 import org.junit.Before;
 import org.junit.Test;

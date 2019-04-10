@@ -1,4 +1,4 @@
-package com.restep.controller;
+package com.restep.web;
 
 import com.restep.model.User;
 import org.springframework.validation.BindingResult;

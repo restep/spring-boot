@@ -1,4 +1,4 @@
-package com.restep.controller;
+package com.restep.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
