@@ -1,7 +1,7 @@
 package com.restep.controller;
 
 import com.restep.dataobject.User;
-import com.restep.mapper.UserMapper;
+import com.restep.mapper.UserMapperXml;
 import com.restep.page.Page;
 import com.restep.req.UserReq;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 public class UserController {
     @Autowired
-    private UserMapper userMapper;
+    private UserMapperXml userMapper;
 
     @GetMapping("/list")
     public List<User> list() {

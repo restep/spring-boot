@@ -5,7 +5,7 @@ import com.restep.req.UserReq;
 
 import java.util.List;
 
-public interface UserMapper {
+public interface UserMapperXml {
 	List<User> getAll();
 
 	List<User> getList(UserReq userReq);
