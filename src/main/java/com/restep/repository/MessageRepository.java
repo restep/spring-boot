@@ -1,6 +1,6 @@
 package com.restep.repository;
 
-import com.restep.model.Message;
+import com.restep.dataobject.Message;
 
 import java.util.List;
 

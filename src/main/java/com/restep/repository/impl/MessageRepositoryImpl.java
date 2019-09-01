@@ -1,6 +1,6 @@
 package com.restep.repository.impl;
 
-import com.restep.model.Message;
+import com.restep.dataobject.Message;
 import com.restep.repository.MessageRepository;
 import org.springframework.stereotype.Service;
 

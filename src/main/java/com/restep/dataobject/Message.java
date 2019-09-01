@@ -1,4 +1,4 @@
-package com.restep.model;
+package com.restep.dataobject;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
