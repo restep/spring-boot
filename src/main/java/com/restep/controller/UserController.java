@@ -1,9 +1,7 @@
 package com.restep.controller;
 
 import com.restep.dataobject.UserDO;
-import com.restep.mapper.UserMapperXml;
-import com.restep.page.Page;
-import com.restep.req.UserReq;
+import com.restep.mapper.UserMapperAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +14,7 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
     @Autowired
-    private UserMapperXml userMapper;
+    private UserMapperAnnotation userMapper;
 
     @GetMapping("/list")
     public List<UserDO> list() {
@@ -24,13 +22,13 @@ public class UserController {
         return users;
     }
 
-    @GetMapping("/listPage")
+    /*@GetMapping("/listPage")
     public Page<UserDO> listPage(UserReq userReq) {
         List<UserDO> users = userMapper.getList(userReq);
         long count = userMapper.getCount(userReq);
         Page page = new Page(userReq, count, users);
         return page;
-    }
+    }*/
 
     @GetMapping("/detail/{id}")
     public UserDO detail(@PathVariable Integer id) {
@@ -45,7 +43,7 @@ public class UserController {
 
     @PostMapping(value = "update")
     public void update(@RequestBody UserDO user) {
-        userMapper.update(user);
+        userMapper.updateUser(user);
     }
 
     @DeleteMapping(value = "/delete/{id}")

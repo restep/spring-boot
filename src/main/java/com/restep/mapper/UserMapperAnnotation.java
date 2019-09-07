@@ -12,42 +12,40 @@ import java.util.Map;
  * @date 2019/9/1
  */
 public interface UserMapperAnnotation {
-    @Select("SELECT * FROM users")
+    @Select("select id,username,password,user_sex,nick_name from user")
     @Results({
             @Result(property = "userSex", column = "user_sex", javaType = UserSexEnum.class),
-            @Result(property = "nickName", column = "nick_name")
+            @Result(property = "nickname", column = "nick_name")
     })
     List<UserDO> getAll();
 
-    @Select("SELECT * FROM users WHERE user_sex = #{user_sex}")
+    @Select("select id,username,password,user_sex,nick_name from user where user_sex = #{user_sex}")
     List<UserDO> getListByUserSex(@Param("user_sex") String userSex);
 
-    @Select("SELECT * FROM users WHERE username=#{username} AND user_sex = #{user_sex}")
+    @Select("select id,username,password,user_sex,nick_name from user where username=#{username} and user_sex = #{user_sex}")
     List<UserDO> getListByNameAndSex(Map<String, Object> map);
 
-    @Select("SELECT * FROM users WHERE id = #{id}")
+    @Select("select id,username,password,user_sex,nick_name from user where id = #{id}")
     @Results({
             @Result(property = "userSex", column = "user_sex", javaType = UserSexEnum.class),
-            @Result(property = "nickName", column = "nick_name")
+            @Result(property = "nickname", column = "nick_name")
     })
-    UserDO getOne(Long id);
+    UserDO getOne(Integer id);
 
-    @Insert("INSERT INTO users(userName,passWord,user_sex) VALUES(#{userName}, #{passWord}, #{userSex})")
+    @Insert("insert into user(username,password,user_sex,nick_name) values (#{username}, #{password}, #{userSex},#{nickname})")
     void insert(UserDO user);
 
-    @Update("UPDATE users SET userName=#{userName},nick_name=#{nickName} WHERE id =#{id}")
-    void update(UserDO user);
-
     @Update({"<script> ",
-            "update users ",
+            "update user ",
             "<set>",
-            " <if test='userName != null'>userName=#{userName},</if>",
-            " <if test='nickName != null'>nick_name=#{nickName},</if>",
+            " <if test='username != null'>username=#{username},</if>",
+            " <if test='password != null'>password=#{password},</if>",
+            " <if test='nickname != null'>nick_name=#{nickname},</if>",
             " </set> ",
             "where id=#{id} ",
             "</script>"})
     void updateUser(UserDO user);
 
-    @Delete("DELETE FROM users WHERE id =#{id}")
-    void delete(Long id);
+    @Delete("delete from user where id =#{id}")
+    void delete(Integer id);
 }

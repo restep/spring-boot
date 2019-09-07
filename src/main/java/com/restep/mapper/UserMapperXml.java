@@ -5,6 +5,9 @@ import com.restep.req.UserReq;
 
 import java.util.List;
 
+/**
+ * @author restep
+ */
 public interface UserMapperXml {
 	List<UserDO> getAll();
 
