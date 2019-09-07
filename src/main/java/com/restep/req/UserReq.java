@@ -1,24 +1,10 @@
 package com.restep.req;
 
-public class UserReq extends PageReq {
+import lombok.Data;
 
-    private String userName;
+@Data
+public class UserReq extends PageReq {
+    private String username;
 
     private String userSex;
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getUserSex() {
-        return userSex;
-    }
-
-    public void setUserSex(String userSex) {
-        this.userSex = userSex;
-    }
 }

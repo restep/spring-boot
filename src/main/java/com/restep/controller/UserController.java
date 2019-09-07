@@ -34,8 +34,8 @@ public class UserController {
 
     @GetMapping("/detail/{id}")
     public UserDO detail(@PathVariable Integer id) {
-        UserDO user = userMapper.getOne(id);
-        return user;
+        UserDO userDO = userMapper.getOne(id);
+        return userDO;
     }
 
     @PostMapping("/add")
@@ -44,7 +44,7 @@ public class UserController {
     }
 
     @PostMapping(value = "update")
-    public void update(UserDO user) {
+    public void update(@RequestBody UserDO user) {
         userMapper.update(user);
     }
 

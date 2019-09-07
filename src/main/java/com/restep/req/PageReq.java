@@ -1,12 +1,16 @@
 package com.restep.req;
 
 public class PageReq {
-    private int beginLine;       //起始行
+    //起始行
+    private int beginLine;
+
     private Integer pageSize = 3;
-    private Integer currentPage=0; 	   // 当前页
+
+    //当前页
+    private Integer currentPage = 0;
 
     public int getBeginLine() {
-        return pageSize*currentPage;
+        return pageSize * currentPage;
     }
 
     public Integer getPageSize() {

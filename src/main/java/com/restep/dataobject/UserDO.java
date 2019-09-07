@@ -11,11 +11,11 @@ import lombok.Data;
 public class UserDO {
 	private Integer id;
 
-	private String userName;
+	private String username;
 
-	private String passWord;
+	private String password;
 
-	private String userSex;
+	private UserSexEnum userSex;
 
-	private String nickName;
+	private String nickname;
 }

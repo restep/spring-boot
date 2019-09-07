@@ -3,19 +3,19 @@
 <mapper namespace="com.restep.mapper.UserMapperXml">
     <resultMap id="BaseResultMap" type="com.restep.dataobject.UserDO">
         <id     column="id"        property="id"       jdbcType="INTEGER" />
-        <result column="userName"  property="userName" jdbcType="VARCHAR"/>
-        <result column="passWord"  property="passWord" jdbcType="VARCHAR"/>
+        <result column="userName"  property="username" jdbcType="VARCHAR"/>
+        <result column="passWord"  property="password" jdbcType="VARCHAR"/>
         <result column="user_sex"  property="userSex"  jdbcType="VARCHAR" javaType="com.restep.enums.UserSexEnum"/>
-        <result column="nick_name" property="nickName" jdbcType="VARCHAR"/>
+        <result column="nick_name" property="nickname" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, userName, passWord, user_sex, nick_name
+        id, username, password, user_sex, nick_name
     </sql>
 
     <sql id="Base_Where_List">
-        <if test="userName != null  and userName != ''">
-            and userName = #{userName}
+        <if test="username != null  and username != ''">
+            and username = #{username}
         </if>
         <if test="userSex != null and userSex != ''">
             and user_sex = #{userSex}
@@ -53,28 +53,27 @@
 
     <insert id="insert" parameterType="com.restep.dataobject.UserDO">
         INSERT INTO
-        users
-        (userName,passWord,user_sex,nick_name)
+        user
+        (username,password,user_sex,nick_name)
         VALUES
-        (#{userName}, #{passWord}, #{userSex},#{nickName})
+        (#{username}, #{password}, #{userSex},#{nickname})
     </insert>
 
     <update id="update" parameterType="com.restep.dataobject.UserDO">
-        UPDATE
-        user
+        UPDATE user
         SET
-        <if test="userName != null">
-            userName = #{userName},
+        <if test="username != null">
+            username = #{username},
         </if>
-        <if test="passWord != null">
-            passWord = #{passWord},
+        <if test="password != null">
+            password = #{password},
         </if>
-        nick_name = #{nickName}
+        nick_name = #{nickname}
         WHERE
         id = #{id}
     </update>
 
     <delete id="delete" parameterType="Integer">
-        DELETE FROM user WHERE id =#{id}
+        delete from user where id = #{id}
     </delete>
 </mapper>
