@@ -1,6 +1,6 @@
 package com.restep.controller;
 
-import com.restep.dataobject.Message;
+import com.restep.dataobject.MessageDO;
 import com.restep.repository.MessageRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,31 +19,31 @@ public class MessageController {
     private MessageRepository messageRepository;
 
     @GetMapping(value = "/messages")
-    public List<Message> list() {
+    public List<MessageDO> list() {
         log.info("查询列表");
         return messageRepository.query();
     }
 
     @PostMapping(value = "/message")
-    public Message add(@RequestBody Message message) {
+    public MessageDO add(@RequestBody MessageDO message) {
         log.info("新增message:{}", message);
         return messageRepository.add(message);
     }
 
     @PutMapping(value = "/message")
-    public Message update(@RequestBody Message message) {
+    public MessageDO update(@RequestBody MessageDO message) {
         log.info("修改message:{}", message);
         return messageRepository.update(message);
     }
 
     @PatchMapping("/message/text")
-    public Message patch(@RequestBody Message message) {
+    public MessageDO patch(@RequestBody MessageDO message) {
         log.info("部分修改message:{}", message);
         return messageRepository.updateText(message);
     }
 
     @GetMapping(value = "/message/{id}")
-    public Message detail(@PathVariable Long id) {
+    public MessageDO detail(@PathVariable Long id) {
         log.info("查看详情id:{}", id);
         return messageRepository.findMessage(id);
     }

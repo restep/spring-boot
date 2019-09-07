@@ -1,6 +1,6 @@
 package com.restep.repository.impl;
 
-import com.restep.dataobject.Message;
+import com.restep.dataobject.MessageDO;
 import com.restep.repository.MessageRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,15 +17,15 @@ import java.util.concurrent.atomic.AtomicLong;
 @Service
 public class MessageRepositoryImpl implements MessageRepository {
     private static AtomicLong counter = new AtomicLong();
-    private final ConcurrentMap<Long, Message> messages = new ConcurrentHashMap<>();
+    private final ConcurrentMap<Long, MessageDO> messages = new ConcurrentHashMap<>();
 
     @Override
-    public List<Message> query() {
+    public List<MessageDO> query() {
         return new ArrayList<>(this.messages.values());
     }
 
     @Override
-    public Message add(Message message) {
+    public MessageDO add(MessageDO message) {
         Long id = message.getId();
         if (null == id) {
             id = counter.incrementAndGet();
@@ -37,14 +37,14 @@ public class MessageRepositoryImpl implements MessageRepository {
     }
 
     @Override
-    public Message update(Message message) {
+    public MessageDO update(MessageDO message) {
         this.messages.put(message.getId(), message);
         return message;
     }
 
     @Override
-    public Message updateText(Message message) {
-        Message existMessage = this.messages.get(message.getId());
+    public MessageDO updateText(MessageDO message) {
+        MessageDO existMessage = this.messages.get(message.getId());
         existMessage.setText(message.getText());
 
         this.messages.put(existMessage.getId(), existMessage);
@@ -52,7 +52,7 @@ public class MessageRepositoryImpl implements MessageRepository {
     }
 
     @Override
-    public Message findMessage(Long id) {
+    public MessageDO findMessage(Long id) {
         return this.messages.get(id);
     }
 

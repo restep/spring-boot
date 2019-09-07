@@ -1,6 +1,6 @@
 package com.restep.controller;
 
-import com.restep.dataobject.User;
+import com.restep.dataobject.UserDO;
 import com.restep.mapper.UserMapperXml;
 import com.restep.page.Page;
 import com.restep.req.UserReq;
@@ -9,43 +9,47 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * @author restep
+ */
 @RestController
+@RequestMapping("/user")
 public class UserController {
     @Autowired
     private UserMapperXml userMapper;
 
     @GetMapping("/list")
-    public List<User> list() {
-        List<User> users = userMapper.getAll();
+    public List<UserDO> list() {
+        List<UserDO> users = userMapper.getAll();
         return users;
     }
 
     @GetMapping("/listPage")
-    public Page<User> listPage(UserReq userReq) {
-        List<User> users = userMapper.getList(userReq);
+    public Page<UserDO> listPage(UserReq userReq) {
+        List<UserDO> users = userMapper.getList(userReq);
         long count = userMapper.getCount(userReq);
         Page page = new Page(userReq, count, users);
         return page;
     }
 
     @GetMapping("/detail/{id}")
-    public User detail(@PathVariable Long id) {
-        User user = userMapper.getOne(id);
+    public UserDO detail(@PathVariable Integer id) {
+        UserDO user = userMapper.getOne(id);
         return user;
     }
 
     @PostMapping("/add")
-    public void add(@RequestBody User user) {
+    public void add(@RequestBody UserDO user) {
         userMapper.insert(user);
     }
 
-    @RequestMapping(value = "update")
-    public void update(User user) {
+    @PostMapping(value = "update")
+    public void update(UserDO user) {
         userMapper.update(user);
     }
 
     @DeleteMapping(value = "/delete/{id}")
-    public void delete(@PathVariable("id") Long id) {
+    public void delete(@PathVariable("id") Integer id) {
         userMapper.delete(id);
     }
 }

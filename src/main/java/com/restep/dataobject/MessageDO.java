@@ -11,7 +11,7 @@ import java.util.Date;
  * @date 2019/9/1
  */
 @Data
-public class Message {
+public class MessageDO {
     private Long id;
 
     private String text;

@@ -1,6 +1,6 @@
 package com.restep.repository;
 
-import com.restep.dataobject.Message;
+import com.restep.dataobject.MessageDO;
 
 import java.util.List;
 
@@ -9,15 +9,15 @@ import java.util.List;
  * @date 2019/9/1
  */
 public interface MessageRepository {
-    List<Message> query();
+    List<MessageDO> query();
 
-    Message add(Message message);
+    MessageDO add(MessageDO message);
 
-    Message update(Message message);
+    MessageDO update(MessageDO message);
 
-    Message updateText(Message message);
+    MessageDO updateText(MessageDO message);
 
-    Message findMessage(Long id);
+    MessageDO findMessage(Long id);
 
     void deleteMessage(Long id);
 }

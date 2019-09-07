@@ -1,23 +1,22 @@
 package com.restep.mapper;
 
-import com.restep.dataobject.User;
+import com.restep.dataobject.UserDO;
 import com.restep.req.UserReq;
 
 import java.util.List;
 
 public interface UserMapperXml {
-	List<User> getAll();
+	List<UserDO> getAll();
 
-	List<User> getList(UserReq userReq);
+	List<UserDO> getList(UserReq userReq);
 
 	int getCount(UserReq userReq);
 
-	User getOne(Long id);
+	UserDO getOne(Integer id);
 
-	void insert(User user);
+	void insert(UserDO user);
 
-	int update(User user);
+	void update(UserDO user);
 
-	int delete(Long id);
-
+	void delete(Integer id);
 }

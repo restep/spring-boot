@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.restep.mapper.UserMapperXml">
-    <resultMap id="BaseResultMap" type="com.restep.dataobject.User">
-        <id column="id" property="id" jdbcType="BIGINT"/>
-        <result column="userName" property="userName" jdbcType="VARCHAR"/>
-        <result column="passWord" property="passWord" jdbcType="VARCHAR"/>
-        <result column="user_sex" property="userSex" javaType="com.neo.enums.UserSexEnum"/>
+    <resultMap id="BaseResultMap" type="com.restep.dataobject.UserDO">
+        <id     column="id"        property="id"       jdbcType="INTEGER" />
+        <result column="userName"  property="userName" jdbcType="VARCHAR"/>
+        <result column="passWord"  property="passWord" jdbcType="VARCHAR"/>
+        <result column="user_sex"  property="userSex"  jdbcType="VARCHAR" javaType="com.restep.enums.UserSexEnum"/>
         <result column="nick_name" property="nickName" jdbcType="VARCHAR"/>
     </resultMap>
 
@@ -23,15 +23,13 @@
     </sql>
 
     <select id="getAll" resultMap="BaseResultMap">
-        SELECT
-        <include refid="Base_Column_List"/>
-        FROM users
+        SELECT <include refid="Base_Column_List"/>
+        FROM user
     </select>
 
     <select id="getList" resultMap="BaseResultMap" parameterType="com.restep.req.UserReq">
-        select
-        <include refid="Base_Column_List"/>
-        from users
+        select <include refid="Base_Column_List"/>
+        from user
         where 1=1
         <include refid="Base_Where_List"/>
         order by id desc
@@ -41,29 +39,29 @@
     <select id="getCount" resultType="Integer" parameterType="com.restep.req.UserReq">
         select
         count(1)
-        from users
+        from user
         where 1=1
         <include refid="Base_Where_List"/>
     </select>
 
-    <select id="getOne" parameterType="Long" resultMap="BaseResultMap">
+    <select id="getOne" parameterType="Integer" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List"/>
-        FROM users
+        FROM user
         WHERE id = #{id}
     </select>
 
-    <insert id="insert" parameterType="com.restep.dataobject.User">
+    <insert id="insert" parameterType="com.restep.dataobject.UserDO">
         INSERT INTO
         users
-        (userName,passWord,user_sex)
+        (userName,passWord,user_sex,nick_name)
         VALUES
-        (#{userName}, #{passWord}, #{userSex})
+        (#{userName}, #{passWord}, #{userSex},#{nickName})
     </insert>
 
-    <update id="update" parameterType="com.restep.dataobject.User">
+    <update id="update" parameterType="com.restep.dataobject.UserDO">
         UPDATE
-        users
+        user
         SET
         <if test="userName != null">
             userName = #{userName},
@@ -76,10 +74,7 @@
         id = #{id}
     </update>
 
-    <delete id="delete" parameterType="Long">
-        DELETE FROM
-        users
-        WHERE
-        id =#{id}
+    <delete id="delete" parameterType="Integer">
+        DELETE FROM user WHERE id =#{id}
     </delete>
 </mapper>

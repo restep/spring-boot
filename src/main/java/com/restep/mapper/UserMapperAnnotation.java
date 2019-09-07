@@ -1,6 +1,6 @@
 package com.restep.mapper;
 
-import com.restep.dataobject.User;
+import com.restep.dataobject.UserDO;
 import com.restep.enums.UserSexEnum;
 import org.apache.ibatis.annotations.*;
 
@@ -17,26 +17,26 @@ public interface UserMapperAnnotation {
             @Result(property = "userSex", column = "user_sex", javaType = UserSexEnum.class),
             @Result(property = "nickName", column = "nick_name")
     })
-    List<User> getAll();
+    List<UserDO> getAll();
 
     @Select("SELECT * FROM users WHERE user_sex = #{user_sex}")
-    List<User> getListByUserSex(@Param("user_sex") String userSex);
+    List<UserDO> getListByUserSex(@Param("user_sex") String userSex);
 
     @Select("SELECT * FROM users WHERE username=#{username} AND user_sex = #{user_sex}")
-    List<User> getListByNameAndSex(Map<String, Object> map);
+    List<UserDO> getListByNameAndSex(Map<String, Object> map);
 
     @Select("SELECT * FROM users WHERE id = #{id}")
     @Results({
             @Result(property = "userSex", column = "user_sex", javaType = UserSexEnum.class),
             @Result(property = "nickName", column = "nick_name")
     })
-    User getOne(Long id);
+    UserDO getOne(Long id);
 
     @Insert("INSERT INTO users(userName,passWord,user_sex) VALUES(#{userName}, #{passWord}, #{userSex})")
-    void insert(User user);
+    void insert(UserDO user);
 
     @Update("UPDATE users SET userName=#{userName},nick_name=#{nickName} WHERE id =#{id}")
-    void update(User user);
+    void update(UserDO user);
 
     @Update({"<script> ",
             "update users ",
@@ -46,7 +46,7 @@ public interface UserMapperAnnotation {
             " </set> ",
             "where id=#{id} ",
             "</script>"})
-    void updateUser(User user);
+    void updateUser(UserDO user);
 
     @Delete("DELETE FROM users WHERE id =#{id}")
     void delete(Long id);
