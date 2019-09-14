@@ -6,7 +6,8 @@ import com.restep.page.Page;
 import com.restep.req.UserReq;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.ListOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,11 +22,20 @@ public class UserController {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private RedisTemplate redisTemplate;
+
+    private static String REDIS_CACHE_KEY = "user.list";
+
     @GetMapping("/list")
-    @Cacheable(value = "listCache")
     public List<UserDO> list() {
+        List<UserDO> users = null;
+
+        if (redisTemplate.hasKey(REDIS_CACHE_KEY)) {
+            return null;
+        }
         log.info("没有走缓存");
-        List<UserDO> users = userMapper.getAll();
+        users = userMapper.getAll();
         return users;
     }
 
@@ -38,7 +48,6 @@ public class UserController {
     }
 
     @GetMapping("/detail/{id}")
-    @Cacheable(value = "id", condition = "#id >= 2")
     public UserDO detail(@PathVariable Integer id) {
         log.info("没有走缓存");
         return userMapper.getOne(id);
