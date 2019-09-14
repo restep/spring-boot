@@ -1,6 +1,5 @@
 package com.restep.dataobject;
 
-import com.restep.enums.UserSexEnum;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -19,7 +18,7 @@ public class UserDO implements Serializable {
 
 	private String password;
 
-	private UserSexEnum userSex;
+	private String userSex;
 
 	private String nickname;
 }

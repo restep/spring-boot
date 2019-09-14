@@ -37,7 +37,7 @@ public class RedisTemplateTest {
         UserDO userDO = new UserDO();
         userDO.setUsername("shifeng");
         userDO.setPassword("shifeng10");
-        userDO.setUserSex(UserSexEnum.MAN);
+        userDO.setUserSex("MAN");
         userDO.setNickname("虫");
 
         ValueOperations<String, UserDO> valueOperations = redisTemplate.opsForValue();
@@ -52,7 +52,7 @@ public class RedisTemplateTest {
         UserDO userDO = new UserDO();
         userDO.setUsername("shifeng");
         userDO.setPassword("shifeng10");
-        userDO.setUserSex(UserSexEnum.MAN);
+        userDO.setUserSex("MAN");
         userDO.setNickname("虫");
 
         ValueOperations<String, UserDO> valueOperations = redisTemplate.opsForValue();
