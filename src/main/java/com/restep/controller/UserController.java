@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,14 +30,19 @@ public class UserController {
 
     @GetMapping("/list")
     public List<UserDO> list() {
-        List<UserDO> users = null;
+        List<UserDO> userDOList = null;
 
         if (redisTemplate.hasKey(REDIS_CACHE_KEY)) {
-            return null;
+            ValueOperations<String, List<UserDO>> valueOperations = redisTemplate.opsForValue();
+            userDOList = valueOperations.get(REDIS_CACHE_KEY);
+            return userDOList;
         }
-        log.info("没有走缓存");
-        users = userMapper.getAll();
-        return users;
+
+        userDOList = userMapper.getAll();
+
+        ValueOperations<String, List<UserDO>> valueOperations = redisTemplate.opsForValue();
+        valueOperations.set(REDIS_CACHE_KEY, userDOList);
+        return userDOList;
     }
 
     @GetMapping("/listPage")
@@ -49,22 +55,27 @@ public class UserController {
 
     @GetMapping("/detail/{id}")
     public UserDO detail(@PathVariable Integer id) {
-        log.info("没有走缓存");
         return userMapper.getOne(id);
     }
 
     @PostMapping("/add")
     public void add(@RequestBody UserDO user) {
         userMapper.insert(user);
+
+        redisTemplate.delete(REDIS_CACHE_KEY);
     }
 
     @PostMapping(value = "update")
     public void update(@RequestBody UserDO user) {
         userMapper.update(user);
+
+        redisTemplate.delete(REDIS_CACHE_KEY);
     }
 
     @DeleteMapping(value = "/delete/{id}")
     public void delete(@PathVariable("id") Integer id) {
         userMapper.delete(id);
+
+        redisTemplate.delete(REDIS_CACHE_KEY);
     }
 }
