@@ -14,4 +14,14 @@ public class RabbitMQConfig {
     public Queue queue() {
         return new Queue("hello");
     }
+
+    @Bean
+    public Queue neoQueue() {
+        return new Queue("restep");
+    }
+
+    @Bean
+    public Queue objectQueue() {
+        return new Queue("object");
+    }
 }
