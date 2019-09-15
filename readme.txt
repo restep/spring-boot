@@ -5,4 +5,6 @@
     https://github.com/ityouknow/spring-boot-leaning.git
     branch gitbook_column2.0
 
-24节 start
+mysql redis
+通过服务开启
+
