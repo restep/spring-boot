@@ -15,6 +15,10 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 @MapperScan("com.restep.mapper")
 public class WebApplication {
+    static {
+        System.setProperty("es.set.netty.runtime.available.processors", "false");
+    }
+
     public static void main(String[] args) {
         SpringApplication.run(WebApplication.class, args);
     }
