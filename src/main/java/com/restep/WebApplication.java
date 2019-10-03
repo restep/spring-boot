@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.embedded.tomcat.TomcatConnectorCustomizer;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @author restep
@@ -14,6 +15,7 @@ import org.springframework.context.annotation.Bean;
  */
 @SpringBootApplication
 @MapperScan("com.restep.mapper")
+@EnableScheduling
 public class WebApplication {
     static {
         System.setProperty("es.set.netty.runtime.available.processors", "false");
